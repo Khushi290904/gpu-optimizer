@@ -1,8 +1,10 @@
-const instances = require("../backend/data/gpu_instance");
+const fetchGpuInstances = require("../backend/fetchGpuInstances");
 
 const HOUR_IN_MONTH = 730;
 const HOUR_IN_HALF_YEAR = 4380;
 const HOUR_IN_YEAR = 8760;
+
+
 
 const modelRequirements = {
   LLM:        { vcpus: 32, ram: 192, gpu_class: "a100" },
@@ -29,7 +31,7 @@ function estimateCost(instance, duration, allow_spot) {
   }
 }
 
-function recommend(input) {
+ async function recommend(input) {
   const {
     model_type = "Default",
     task = "training",
@@ -44,6 +46,21 @@ function recommend(input) {
 
   const req = modelRequirements[model_type] || modelRequirements.Default;
   const results = [];
+
+
+  let instances = [];
+  try {
+    const data = await fetchGpuInstances();
+    instances = data.data
+
+     // ✅ WAIT for promise to resolve
+  } catch (err) {
+    console.error("❌ Failed to fetch GPU instances:", err.message);
+    return [];
+  }
+  console.log(instances);
+  
+  
 
   if (!Array.isArray(instances)) {
     console.error("❌ Instances is not an array!");
@@ -108,6 +125,7 @@ function recommend(input) {
   }
 
   console.log("✅ Final recommendations:", results.length);
+  console.log(results)
   return results.sort((a, b) => b.score - a.score);
 }
 

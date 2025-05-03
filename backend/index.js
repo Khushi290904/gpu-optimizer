@@ -1,49 +1,31 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const recommend = require('./recommend');
+const fetchGpuInstances = require('../backend/fetchGpuInstances');
+
 const app = express();
-const recommend = require("../backend/recommend.js");
+const port = 3000;
 
-// Middleware to parse JSON request bodies
+app.use(bodyParser.json());
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-const sampleData = {
-  "model_type": "Transformer",
-  "task": "training",
-  "dataset_size": 100,
-  "duration": {
-    "type": "hours",
-    "value": 10
-  },
-  "budget": 100,
-  "region": "mumbai",
-  "country": "india",
-  "operating_system": "windows",
-  "allow_spot": true
-};
-
-const port = process.env.PORT || 3000;
-
-// Root route
-app.get("/", (req, res) => {
-    res.send("Working fine");
-});
-
-// GET route for recommendation
-app.get('/recommend', (req, res) => {
-    res.json(sampleData);
-});
-
-// POST route for recommendation
-app.post("/recommend", (req, res) => {
-    const data = req.body;
-    console.log("Received Data:", data);
-    res.send("Got the data");
-
-   const check =  recommend(data);
-   console.log(check);
-   
-
+app.post('/recommend', async (req, res) => {
+  try {
+    const input = req.body;
+    const recommendations = await recommend(input); // ✅ Await it
+    res.json({
+      success: true,
+      recommendations
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
 });
 
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server running at http://localhost:${port}`);
 });
