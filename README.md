@@ -19,6 +19,6 @@ A cloud-based recommendation system that helps users select optimal GPU instance
 - javaScript
 
 **Backend**:
-- FastAPI
-- Python 3.9+
-- Uvicorn
+- Node
+- Express
+
