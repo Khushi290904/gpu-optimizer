@@ -1,36 +1,90 @@
-# GPU Cost Optimizer 🚀
+# gpu-optimizer
 
-A cloud-based recommendation system that helps users select optimal GPU instances based on their workload requirements and budget constraints.
+## ⚡ GPU Recommendation System
 
-## ✨ Features
-
-- **Intelligent Recommendations**: Suggests GPU instances
-- **Cost Comparison**: View hourly, monthly, and spot pricing
-- **Workload Analysis**: Input model type, dataset size, and training/inference needs
-- **Region Support**: Multiple cloud regions available
-- **Request System**: Request unavailable GPU instances
-
-## 🛠️ Project Setup
-
-### **Tech Stack**
-
-**Frontend**:
-- React 18 (JavaScript library for building user interfaces)
-- Vite (Next-generation frontend tooling)
-- CSS (Styling components)
-- JavaScript (Primary programming language)
-
-**Backend**:
-- Node.js (JavaScript runtime environment)
-- Express (Web application framework for Node.js)
+This project is a full-stack web application that recommends GPU instances for machine learning workloads based on user-defined requirements such as model type, dataset size, duration, budget, region, and more.
 
 ---
 
-### **Development Environment Setup**
+## 📦 Tech Stack
 
-#### **Prerequisites**
-- Node.js v18+ [Download](https://nodejs.org/)
-- npm (comes with Node.js) or yarn
-- Git [Download](https://git-scm.com/)
+- **Frontend**: React 19 + Vite + Axios
+- **Backend**: Node.js + Express
+- **Language**: JavaScript (ES Modules)
+- **Styling**: CSS
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone git@github.com:Khushi290904/gpu-optimizer.git
+
+# Install backend dependencies
+npm install
+
+# Navigate to frontend directory
+cd frontend
+
+# Install frontend dependencies
+npm install
+
+#3. Run the App
+cd frontend
+npm run dev
+Open your browser at: http://localhost:5173
+
+## API Reference
+
+# POST /api/recommend
+Request Body
+{
+  "model_type": "Transformer",         // Type of ML model (e.g., LLM, Transformer, CNN, GAN)
+  "task": "inference",                 // Task type: "training" or "inference"
+  "dataset_size": 100,                 // Size of your dataset in GB
+  "duration": {
+    "type": "hours",                   // Duration unit: "hours" or "minutes"
+    "value": 8                         // Duration value (numeric)
+  },
+  "budget": 700,                       // Total budget (in currency unit)
+  "country": "usa",                    // Country where resources should be located
+  "region": "atlanta",                 // Specific region (e.g., "mumbai", "atlanta")
+  "operating_system": "windows",       // Preferred OS: "linux" or "windows"
+  "allow_spot": true                   // Whether to allow spot instances (boolean)
+}
+
+ Response Body
+
+ {
+  "success": true,
+  "recommendations": [
+    {
+      "resource_name": "W.N.A100.512",             // Unique identifier of the resource
+      "gpu": "4x A100",                            // GPU configuration (e.g., 4x A100)
+      "vcpus": 64,                                 // Number of virtual CPUs
+      "ram": 512,                                  // RAM in GB
+      "estimated_cost": 60.14,                     // Estimated total cost for the specified duration
+      "used_spot": true,                           // Whether spot pricing was used
+      "score": 9.42,                               // Suitability score (higher is better)
+      "explanation": "W.N.A100.512 with 4x A100 fits your inference workload for Transformer on a 100GB dataset within your budget of ₹700. Cost: ₹60.14, using spot pricing."
+    },
+    {
+      "resource_name": "W.N.A100.256",             // Unique identifier of the resource
+      "gpu": "2x A100",                            // GPU configuration (e.g., 2x A100)
+      "vcpus": 32,                                 // Number of virtual CPUs
+      "ram": 256,                                  // RAM in GB
+      "estimated_cost": 30.07,                     // Estimated total cost for the specified duration
+      "used_spot": true,                           // Whether spot pricing was used
+      "score": 9.27,                               // Suitability score (higher is better)
+      "explanation": "W.N.A100.256 with 2x A100 fits your inference workload for Transformer on a 100GB dataset within your budget of ₹700. Cost: ₹30.07, using spot pricing."
+    }
+  ]
+}
 
 
+
+
+
+```
