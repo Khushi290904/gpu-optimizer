@@ -6,6 +6,12 @@ This project is a full-stack web application that recommends GPU instances for m
 
 ---
 
+## 📦 vedio
+
+https://drive.google.com/drive/folders/1-6jZ99f2OEcus0QJTjH4sPeu16LmSyTb
+
+---
+
 ## 📦 Tech Stack
 
 - **Frontend**: React 19 + Vite + Axios
@@ -22,7 +28,7 @@ This project is a full-stack web application that recommends GPU instances for m
 ```bash
 git clone git@github.com:Khushi290904/gpu-optimizer.git
 
-# Install backend dependencies
+ Install backend dependencies
 npm install
 
 # Navigate to frontend directory
