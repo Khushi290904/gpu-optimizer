@@ -6,7 +6,7 @@ This project is a full-stack web application that recommends GPU instances for m
 
 ---
 
-## 📦 vedio
+## 📦 video
 
 https://drive.google.com/drive/folders/1-6jZ99f2OEcus0QJTjH4sPeu16LmSyTb
 
@@ -36,15 +36,20 @@ cd frontend
 
 # Install frontend dependencies
 npm install
+```
+
 
 #3. Run the App
+```bash
 cd frontend
 npm run dev
 Open your browser at: http://localhost:5173
+```
 
 ## API Reference
 
 # POST /api/recommend
+```bash
 Request Body
 {
   "model_type": "Transformer",         // Type of ML model (e.g., LLM, Transformer, CNN, GAN)
@@ -60,8 +65,10 @@ Request Body
   "operating_system": "windows",       // Preferred OS: "linux" or "windows"
   "allow_spot": true                   // Whether to allow spot instances (boolean)
 }
+```
 
- Response Body
+ #Response Body
+ ```bash
 
  {
   "success": true,
@@ -88,9 +95,10 @@ Request Body
     }
   ]
 }
-
-
-
-
-
 ```
+
+
+
+
+
+
