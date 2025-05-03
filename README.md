@@ -10,15 +10,27 @@ A cloud-based recommendation system that helps users select optimal GPU instance
 - **Region Support**: Multiple cloud regions available
 - **Request System**: Request unavailable GPU instances
 
-## 🛠️ Tech Stack
+## 🛠️ Project Setup
+
+### **Tech Stack**
 
 **Frontend**:
-- React
-- Vite
-- css
-- javaScript
+- React 18 (JavaScript library for building user interfaces)
+- Vite (Next-generation frontend tooling)
+- CSS (Styling components)
+- JavaScript (Primary programming language)
 
 **Backend**:
-- Node
-- Express
+- Node.js (JavaScript runtime environment)
+- Express (Web application framework for Node.js)
+
+---
+
+### **Development Environment Setup**
+
+#### **Prerequisites**
+- Node.js v18+ [Download](https://nodejs.org/)
+- npm (comes with Node.js) or yarn
+- Git [Download](https://git-scm.com/)
+
 
